@@ -1,0 +1,14 @@
+{
+  "name": "e-shop",
+  "version": "1.0.0",
+  "description": "this is a online shop with node-js and mongoDB ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ali mahdavi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
