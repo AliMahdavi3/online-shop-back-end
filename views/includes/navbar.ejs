@@ -11,25 +11,26 @@
     >
       <span class="navbar-toggler-icon bg-warning"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <div class="collapse navbar-collapse my-2" id="navbarTogglerDemo01">
+    <a class="text-decoration-none fw-bold text-success fs-4" href="/">OnlineShop</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-lg-flex text-light">
         <li class="nav-item">
-          <a class="nav-link text-light disabled">محصولات ادمین</a>
+          <a class="nav-link text-light <%= pageTitle === "/" ? "active" : "" %>" href="/">محصولات ادمین</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light disabled">افزودن محصول</a>
+          <a class="nav-link text-light <%= pageTitle === "/admin/add-product" ? "active" : "" %>" href="/admin/add-product">افزودن محصول</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light disabled">سفارشات</a>
+          <a class="nav-link text-light <%= pageTitle === "/" ? "active" : "" %>" href="/">سفارشات</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light disabled">سبد خرید</a>
+          <a class="nav-link text-light <%= pageTitle === "/" ? "active" : "" %>" href="/">سبد خرید</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">محصولات</a>
+          <a class="nav-link text-light <%= pageTitle === "/" ? "active" : "" %>" href="/">محصولات</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light active" aria-current="page" href="#">خانه</a>
+          <a class="nav-link text-light <%= pageTitle === "/" ? "active" : "" %>" aria-current="page" href="/">خانه</a>
         </li>
       </ul>
       <!-- <form class="d-flex" role="search">
