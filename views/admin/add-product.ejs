@@ -1,0 +1,27 @@
+<%- include("../includes/head.ejs") %> 
+<%- include("../includes/header.ejs") %>
+<%- include("../includes/navbar.ejs") %>
+
+<div dir="rtl" class="container">
+    <form action="/admin/add-product" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">عنوان</label>
+            <input type="text" name="title" class="form-control" placeholder="عنوان محصول را وارد کنید" id="title">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">قیمت</label>
+            <input type="number" name="price" class="form-control" placeholder="قیمت محصول را وارد کنید" id="price">
+        </div>
+        <div class="mb-3">
+            <label for="imageUrl" class="form-label">آدرس عکس</label>
+            <input type="text" name="imageUrl" class="form-control" placeholder="عکس محصول را وارد کنید" id="imageUrl">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">توضیحات</label>
+            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+        </div>
+        <button type="submit" class="pt-2 mb-5 btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<%- include("../includes/end.ejs") %>

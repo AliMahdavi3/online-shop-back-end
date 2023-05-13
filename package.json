@@ -4,6 +4,7 @@
   "description": "this is a online shop with node-js and mongoDB ",
   "main": "app.js",
   "scripts": {
+    "dev" : "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ali mahdavi",
@@ -12,6 +13,7 @@
     "body-parser": "^1.20.2",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "mongoose": "^7.1.1"
+    "mongoose": "^7.1.1",
+    "nodemon": "^2.0.22"
   }
 }

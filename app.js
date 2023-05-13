@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended : false }));
 app.use("/admin", adminRouter);
 app.use(shopRouter);
 
-mongoose.connect("mongodb://localhost:27017/shop").then((result) => {
-    app.listen(3000, () => {
+mongoose.connect("mongodb://0.0.0.0:27017/shop").then((result) => {
+    app.listen(3003, () => {
         console.log("Listening On Port 3000");
     })
 }).catch((error) => {
