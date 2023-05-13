@@ -4,16 +4,16 @@
 
 
 <% if(prods.length > 0 ){ %>
-  <section class="container d-flex justify-content-center align-items-center">
-    <main class="row">
+  <section class="container">
+    <main class="row d-flex justify-content-center align-items-center">
     <% for(let product of prods) {%>
-      <div class="col-12 col-sm-6 col-md-4 card my-5 mx-3 border-0 shadow-lg" style="width: 15rem;">
+      <div class="col-12 col-sm-6 col-md-4 card my-5 mx-3 border-0" style="width: 15rem;">
         <img src="<%= product.imageUrl %>" class="card-img-top w-100" alt="...">
         <div class="card-body">
           <h5 class="card-title"><%= product.title %></h5>
           <h6 class="card-title"><%= product.price %></h6>
           <p class="card-text"><%= product.description %></p>
-          <a href="#" class="btn btn-success">جزییات</a>
+          <a href="/products/<%= product._id %>" class="btn btn-success">اطلاعات</a>
         </div>
       </div>
     <% } %>

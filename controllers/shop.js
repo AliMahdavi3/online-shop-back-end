@@ -11,3 +11,16 @@ exports.getIndex = (req, res) => {
         console.log(error.message);
     });
 };
+
+exports.getProduct = (req, res) => {
+    const prodId = req.params.productId;
+    Product.findById(prodId).then((product) => {
+        res.render("shop/product-detaile", {
+            product : product,
+            pageTitle : product.title,
+            path : "/products"
+        });
+    }).catch((error) => {
+        console.log(error.message);
+    });
+};

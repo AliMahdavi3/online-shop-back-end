@@ -37,10 +37,12 @@ body {
 }
 
 .card {
-  background-color: rgb(161, 168, 168, 0.7);
+  background-color: rgba(209, 212, 212, 0.7);
   text-align: end;
+  box-shadow: 10px 10px 20px rgb(75, 73, 73);
+  border-radius:20px;
+  border: none;
 }
-
 
 .price::placeholder {
   text-align: end;
