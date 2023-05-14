@@ -15,7 +15,10 @@
           <h6 class="card-title"><%= product.price %></h6>
           <p class="card-text"><%= product.description %></p>
           <hr>
-          <a href="/products/<%= product._id %>" class="btn btn-success">اطلاعات</a>
+          <div class="d-flex font_size justify-content-end">
+            <a href="/products/<%= product._id %>" class="btn btn-success mx-2">اطلاعات</a>
+            <%- include("../includes/add-to-cart.ejs") %>
+          </div>
         </div>
       </div>
     <% } %>

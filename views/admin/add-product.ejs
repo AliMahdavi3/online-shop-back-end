@@ -3,24 +3,35 @@
 <%- include("../includes/navbar.ejs") %>
 
 <div dir="rtl" class="container">
-    <form action="/admin/add-product" method="post">
+    <form action="/admin/<% if(editing){ %>edit-product<% } else { %>add-product<% } %>" method="post">
         <div class="mb-3 mt-3">
             <label for="title" class="form-label">عنوان</label>
-            <input type="text" name="title" class="form-control" placeholder="عنوان محصول را وارد کنید" id="title">
+            <input type="text" name="title" class="form-control" 
+            placeholder="عنوان محصول را وارد کنید" id="title" 
+            value="<% if(editing){ %> <%= product.title %><% } %>">
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">قیمت</label>
-            <input type="number" name="price" class="form-control price" placeholder="قیمت محصول را وارد کنید" id="price">
+            <input type="number" name="price" class="form-control price" 
+            placeholder="قیمت محصول را وارد کنید" id="price" 
+            value="<% if(editing){ %><%= product.price%><% } %>">
         </div>
         <div class="mb-3">
             <label for="imageUrl" class="form-label">آدرس عکس</label>
-            <input type="text" name="imageUrl" class="form-control" placeholder="عکس محصول را وارد کنید" id="imageUrl">
+            <input type="text" name="imageUrl" class="form-control" 
+            placeholder="عکس محصول را وارد کنید" id="imageUrl" 
+            value="<% if(editing){ %> <%= product.imageUrl %><% } %>">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">توضیحات</label>
-            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+            <textarea class="form-control" name="description" 
+            id="description" rows="3"><% if(editing){ %> <%= product.description %><% } %></textarea>
         </div>
-        <button type="submit" class="pt-2 mb-5 btn btn-success">ثبت محصول</button>
+        <% if(editing){ %>
+            <input type="hidden" value="<%= product._id %>" name="productId">
+        <% } %>
+        <button type="submit" 
+        class="pt-2 mb-5 btn btn-success"><% if(editing){ %>ویرایش محصول<% } else { %>ثبت محصول<% } %></button>
     </form>
 </div>
 

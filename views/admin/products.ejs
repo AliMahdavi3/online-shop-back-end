@@ -15,7 +15,13 @@
           <h6 class="card-title"><%= product.price %></h6>
           <p class="card-text"><%= product.description %></p>
           <hr>
-          <a href="/products/<%= product._id %>" class="btn btn-success">اطلاعات</a>
+          <div class="d-flex justify-content-end">
+            <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn btn-warning mx-2">ویرایش</a>
+            <form action="/admin/delete-product" method="post">
+              <input type="hidden" value="<%= product._id %>" name="productId">
+              <button type="submit" class="btn btn-danger">حذف</button>
+            </form>
+          </div>
         </div>
       </div>
     <% } %>
