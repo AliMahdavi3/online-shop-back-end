@@ -17,7 +17,7 @@
           <hr>
           <div class="d-flex font_size justify-content-end">
             <a href="/products/<%= product._id %>" class="btn btn-success mx-2">اطلاعات</a>
-            <%- include("../includes/add-to-cart.ejs") %>
+            <%- include("../includes/add-to-cart.ejs", {product : product}) %>
           </div>
         </div>
       </div>

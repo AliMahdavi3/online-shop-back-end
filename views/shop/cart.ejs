@@ -1,0 +1,30 @@
+<%- include("../includes/head.ejs") %> 
+<%- include("../includes/header.ejs") %>
+<%- include("../includes/navbar.ejs") %>
+<!-- main template -->
+<main class="d-flex justify-content-center align-items-center">
+    <% if(products.length > 0) { %>
+    <ul class="list-unstyled container rounded-4">
+    <% products.forEach(p => { %>
+        <li class="py-3 my-3 background rounded-4 d-flex justify-content-center align-items-center shadow-sm">
+            <div class="w-25">
+                <img class="cart_img" src="<%= p.productId.imageUrl %>" alt="">
+            </div>
+            <h3 class="ms-5 ms-sm-5 mt-2 cart_font"><%= p.productId.title %></h3>
+            <h4 class="ms-1 ms-sm-5 mt-2 cart_font"><%= p.quantity %></h4>
+            <form action="/cart-delete-item" method="post">
+                <button type="submit" class="cart_btn btn btn-danger ms-1 ms-sm-5">حذف</button>
+                <input type="hidden" name="productId" value="<%= p.productId._id %>">
+            </form>
+        </li>
+    <%   }); %>
+    </ul>
+    <% } else { %>
+    <div class="d-flex align-items-center justify-content-center flex-column my-4">
+        <h1 class="text-center text-danger my-5">!...سبد خرید خالی است</h1>
+        <img src="../assets/image/non.jpg" class="w-25" alt="no product">
+    </div>
+     <% } %>
+</main>
+
+<%- include("../includes/end.ejs") %>

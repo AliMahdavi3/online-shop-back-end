@@ -34,3 +34,33 @@ exports.getProduct = (req, res) => {
         console.log(error.message);
     });
 };
+
+exports.postCart = (req, res) => {
+    const prodId = req.body.productId;
+    Product.findById(prodId).then((product) => {
+        req.user.addTocart(product);
+        res.redirect("/products");
+    }).catch((error) => {
+        console.log(error);
+    });
+};
+
+exports.getCart = async (req, res) => {
+    const user = await req.user.populate("cart.items.productId");
+
+    res.render("shop/cart", {
+        pageTitle : "Cart",
+        path : "/cart",
+        products : user.cart.items,
+    });
+};
+
+exports.postCartDeleteProduct = (req, res) => {
+    const prodId = req.body.productId;
+    req.user.removeCart(prodId).then((result) => {
+        console.log(result);
+        res.redirect("/cart");
+    }).catch((error) => {
+        console.log(error);
+    });
+};
