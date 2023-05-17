@@ -19,7 +19,11 @@ body {
 }
 
 .background {
-  background-color: rgb(189, 224, 248);
+  background-color: rgb(195, 195, 196);
+}
+
+.boxShadow {
+  box-shadow: 0 2px 10px rgb(82, 81, 81);
 }
 
 .header {
@@ -33,6 +37,8 @@ body {
 
 .navbar {
   background-color: rgb(54, 53, 54);
+  border-radius: 0px 0px 20px 20px;
+  box-shadow: 5px 5px 5px 5px rgb(199, 199, 199);
 }
 
 .font_size button,

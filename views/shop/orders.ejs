@@ -1,0 +1,27 @@
+<%- include("../includes/head.ejs") %> 
+<%- include("../includes/header.ejs") %>
+<%- include("../includes/navbar.ejs") %>
+<!-- main template -->
+<main>
+<% if(orders.length > 0) { %>
+    <ul class="list-unstyled container flex-column d-flex justify-content-center align-items-center">
+    <% orders.forEach((order) => { %>
+        <li class="text-center rounded-4 boxShadow my-4 w-50">
+            <h4 class="pt-3 pb-2"><%= order._id %> شناسه</h4>
+            <hr>
+            <ul class="list-unstyled pb-3">
+            <% order.products.forEach((p) => { %>
+                <li class="text-success fw-bold"><%= p.product.title %>(<%= p.quantity %>)</li>
+            <% }) %>
+            </ul>
+        </li>
+    <% }) %>
+    </ul>
+<% } else { %>
+    <div class="d-flex align-items-center justify-content-center flex-column my-4">
+        <h1 class="text-center text-danger my-4">!...سفارشی ثبت نشده</h1>
+        <img src="../assets/image/non.jpg" class="w-25" alt="no product">
+    </div>
+<% } %>
+</main>
+<%- include("../includes/end.ejs") %>

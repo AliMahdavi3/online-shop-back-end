@@ -2,11 +2,11 @@
 <%- include("../includes/header.ejs") %>
 <%- include("../includes/navbar.ejs") %>
 <!-- main template -->
-<main class="d-flex justify-content-center align-items-center">
+<main class="d-flex justify-content-center align-items-center flex-column">
     <% if(products.length > 0) { %>
     <ul class="list-unstyled container rounded-4">
     <% products.forEach(p => { %>
-        <li class="py-3 my-3 background rounded-4 d-flex justify-content-center align-items-center shadow-sm">
+        <li class="py-3 my-3 background rounded-4 d-flex justify-content-center align-items-center shadow-lg">
             <div class="w-25">
                 <img class="cart_img" src="<%= p.productId.imageUrl %>" alt="">
             </div>
@@ -19,12 +19,23 @@
         </li>
     <%   }); %>
     </ul>
+    <div class="mb-5">
+        <div>
+            <div>
+                <form action="/create-order" method="post">
+                    <button type="submit" class="btn btn-dark">سفارش محصولات</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <% } else { %>
     <div class="d-flex align-items-center justify-content-center flex-column my-4">
         <h1 class="text-center text-danger my-5">!...سبد خرید خالی است</h1>
         <img src="../assets/image/non.jpg" class="w-25" alt="no product">
     </div>
-     <% } %>
+    <% } %>
+
+
 </main>
 
 <%- include("../includes/end.ejs") %>
