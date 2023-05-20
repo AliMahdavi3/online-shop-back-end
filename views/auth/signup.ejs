@@ -1,0 +1,58 @@
+<%- include("../includes/head.ejs") %>
+
+<section class="login_main">
+  <div class="d-flex container justify-content-center align-items-center">
+    <div class="py-5 px-5 rounded-4 margin bg-light boxShadow login">
+      <% if(errorMessage) { %>
+        <h6 class="alert alert-danger text-center"><%= errorMessage %></h6>
+      <% } %>
+      <h4 class="text-center">ثبت نام</h4>
+      <form action="/signup" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <div class="mb-1 row flex-column login_font" dir="rtl">
+          <label for="staticEmail" class="col-form-label">ایمیل</label>
+          <input
+            name="email"
+            type="email"
+            id="staticEmail"
+            class="form-control py-2 border-0 shadow text-start 
+            <%= validationErrors.find((e) => e.path === "email") ? "alert alert-danger" : "" %>"
+            placeholder="ایمیل یا نام کاربری"
+            value="<%= oldInput.email %>"
+          />
+        </div>
+        <div class="mb-1 row flex-column login_font" dir="rtl">
+          <label for="inputPassword" class="col-form-label">رمز عبور</label>
+          <input
+            value="<%= oldInput.password %>"
+            name="password"
+            type="password"
+            class="form-control py-2 border-0 shadow 
+            <%= validationErrors.find((e) => e.path === "password") ? "alert alert-danger" : "" %>"
+            placeholder="رمز عبور"
+            id="inputPassword"
+          />
+        </div>
+        <div class="mb-1 row flex-column login_font" dir="rtl">
+          <label for="inputPassword" class="col-form-label"
+            >تکرار رمز عبور</label
+          >
+          <input
+            value="<%= oldInput.confirmPassword %>"
+            name="confirmPassword"
+            type="password"
+            class="form-control py-2 border-0 shadow 
+            <%= validationErrors.find((e) => e.path === "confirmPassword") ? "alert alert-danger" : "" %>"
+            placeholder="تکرار رمز عبور"
+            id="inputPassword"
+          />
+        </div>
+        <div class="mb-2 row flex-column login_font" dir="rtl">
+          <button class="btn btn-success mt-2">ثبت نام</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include("../includes/end.ejs") %>

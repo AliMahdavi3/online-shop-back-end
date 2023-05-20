@@ -18,6 +18,7 @@
           <div class="d-flex justify-content-end">
             <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn btn-warning mx-2">ویرایش</a>
             <form action="/admin/delete-product" method="post">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <input type="hidden" value="<%= product._id %>" name="productId">
               <button type="submit" class="btn btn-danger">حذف</button>
             </form>

@@ -6,12 +6,13 @@
 <% if(orders.length > 0) { %>
     <ul class="list-unstyled container flex-column d-flex justify-content-center align-items-center">
     <% orders.forEach((order) => { %>
-        <li class="text-center rounded-4 boxShadow my-4 w-50">
+        <li class="text-center rounded-3 boxShadow my-4 w-50">
             <h4 class="pt-3 pb-2"><%= order._id %> شناسه</h4>
             <hr>
-            <ul class="list-unstyled pb-3">
+            <ul class="list-unstyled">
             <% order.products.forEach((p) => { %>
-                <li class="text-success fw-bold"><%= p.product.title %>(<%= p.quantity %>)</li>
+                <li class="text-success py-3 border my-2 fw-bold"><%= p.product.title %>
+                <span class="text-danger mx-3">(<%= p.quantity %>)</span></li>
             <% }) %>
             </ul>
         </li>
@@ -20,7 +21,7 @@
 <% } else { %>
     <div class="d-flex align-items-center justify-content-center flex-column my-4">
         <h1 class="text-center text-danger my-4">!...سفارشی ثبت نشده</h1>
-        <img src="../assets/image/non.jpg" class="w-25" alt="no product">
+        <img src="../assets/image/no-order.jpg" class="w-25" alt="no product">
     </div>
 <% } %>
 </main>

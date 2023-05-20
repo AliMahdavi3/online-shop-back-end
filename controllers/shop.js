@@ -1,12 +1,14 @@
 const Product = require("../models/product");
 const Order = require("../models/order");
+const cookieParser = require("../utils/cookieParser");
 
 exports.getProducts = (req, res) => {
     Product.find().then((products) => {
         res.render("shop/products-list", {
             prods : products,
             pageTitle : "All Products",
-            path : "/products"
+            path : "/products",
+            isAuthenticated : req.session.isLoggedIn
         })
     })
 }
@@ -17,6 +19,8 @@ exports.getIndex = (req, res) => {
             path : "/",
             pageTitle : "Shop",
             prods : products,
+            isAuthenticated : req.session.isLoggedIn,
+            csrfToken : req.csrfToken(),
         });
     }).catch((error) => {
         console.log(error.message);
@@ -29,7 +33,8 @@ exports.getProduct = (req, res) => {
         res.render("shop/product-detaile", {
             product : product,
             pageTitle : product.title,
-            path : "/products"
+            path : "/products",
+            isAuthenticated : req.session.isLoggedIn
         });
     }).catch((error) => {
         console.log(error.message);
@@ -53,6 +58,7 @@ exports.getCart = async (req, res) => {
         pageTitle : "Cart",
         path : "/cart",
         products : user.cart.items,
+        isAuthenticated : req.session.isLoggedIn
     });
 };
 
@@ -76,7 +82,7 @@ exports.postOrder = (req, res) => {
         });
         const order = new Order({
             user : {
-                name : req.user.name,
+                email : req.user.email,
                 userId : req.user,
             },
             products : products
@@ -100,6 +106,7 @@ exports.getOrder = (req, res) => {
             pageTitle : "Orders",
             path : "orders",
             orders : orders,
+            isAuthenticated : req.session.isLoggedIn
         });
     })
 };

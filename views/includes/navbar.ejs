@@ -12,9 +12,20 @@
       <span class="navbar-toggler-icon bg-warning"></span>
     </button>
     <div class="collapse navbar-collapse my-2" id="navbarTogglerDemo01">
-    <button class="btn btn-secondary fw-bold ms-4" href="/login">ورود</button>
+    <% if(!isAuthenticated) { %>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <a class="btn btn-warning fw-bold ms-1 text-dark" href="/login">ورود</a>
+    <a class="btn btn-success fw-bold ms-2 text-light" href="/signup">ثبت نام</a>
+    <% } else { %>
+    <form action="/logout" method="post">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="btn btn-secondary fw-bold ms-4 text-light" href="/logout">خروج</button>
+    </form>
+    <% } %>
     <a class="text-decoration-none fw-bold fs-4" href="/">ONLINE<span class="shop text-danger">SHOP</span></a>
+
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-lg-flex text-light">
+      <% if(isAuthenticated){ %>
         <li class="nav-item">
           <a class="nav-link" href="/admin/products">محصولات ادمین</a>
         </li>
@@ -27,6 +38,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/cart">سبد خرید</a>
         </li>
+      <% } %>
         <li class="nav-item">
           <a class="nav-link" href="/products">محصولات</a>
         </li>

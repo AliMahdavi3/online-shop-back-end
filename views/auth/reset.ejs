@@ -1,0 +1,28 @@
+<%- include("../includes/head.ejs") %> 
+
+<section class="login_main">
+    <div class="d-flex container justify-content-center align-items-center">
+        <div class="py-5 px-5 rounded-4 margin bg-light boxShadow login">
+            <% if(errorMessage) { %>
+                <h6 class="alert alert-danger text-center"><%= errorMessage %></h6>
+            <% } %>
+            <h1 class="text-center">بازیابی رمز عبور</h1>
+            <form action="/reset" method="post">
+
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <div class="mb-2 row flex-column login_font" dir="rtl">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">ایمیل</label>
+                    <input name="email" type="text" class="form-control py-2  border-0 shadow" placeholder="ایمیل خود را وارد کنید" id="staticEmail">
+                </div>
+                
+                <div class="mb-2 row flex-column login_font" dir="rtl">
+                    <button class="btn btn-info mt-2">ارسال</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+<%- include("../includes/end.ejs") %>

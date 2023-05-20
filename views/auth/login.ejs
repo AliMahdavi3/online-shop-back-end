@@ -1,0 +1,48 @@
+<%- include("../includes/head.ejs") %> 
+
+<section class="login_main">
+    <div class="d-flex container justify-content-center align-items-center">
+        <div class="py-5 px-5 rounded-4 margin bg-light boxShadow login">
+
+            <% if(errorMessage) { %>
+                <h6 class="alert alert-warning text-center"><%= errorMessage %></h6>
+            <% } %>
+            <% if(successMessage[0]) { %>
+                <h6 class="alert alert-success text-center"><%= successMessage[0] %></h6>
+            <% } %>
+
+            <h4 class="text-center">ورود</h4>
+            <form action="/login" method="post">
+
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <div class="mb-2 row flex-column login_font" dir="rtl">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">ایمیل</label>
+                    <input name="email" type="text" 
+                    class="form-control py-2  border-0 shadow 
+                    <%= validationErrors.find((e) => e.path === "email") ? "alert alert-danger" : "" %>" 
+                    placeholder="ایمیل یا نام کاربری" id="staticEmail">
+                </div>
+                
+                <div class="mb-2 row flex-column login_font" dir="rtl">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">رمز عبور</label>
+                    <input name="password" type="password" 
+                    class="form-control py-2  border-0 shadow 
+                    <%= validationErrors.find((e) => e.path === "password") ? "alert alert-danger" : "" %>" 
+                    placeholder="رمز عبور" id="inputPassword">
+                </div>
+
+                <div class="mb-2 row flex-column login_font" dir="rtl">
+                    <button class="btn btn-primary mt-2">ورود</button>
+                </div>
+
+            </form>
+            <hr>
+            <div class="text-center">
+                <a class="text-decoration-none text-dark" href="/reset">رمز عبور را فراموش کرده اید؟</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include("../includes/end.ejs") %>

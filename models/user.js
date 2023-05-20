@@ -3,20 +3,28 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-    minlength: 3,
-    maxlength: 15,
-  },
+//   name: {
+//     type: String,
+//     required: true,
+//     unique: true,
+//     minlength: 3,
+//     maxlength: 15,
+//   },
   email: {
     type: String,
+    sparse:true,
+    index : true,
     required: true,
     unique: true,
     lowercase: true,
     minlength: 8,
     maxlength: 30,
+  },
+  resetToken : String,
+  ExpiredDateresetToken : Date,
+  password: {
+    type: String,
+    required: true,
   },
     cart: {
         items: [{

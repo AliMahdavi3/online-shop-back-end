@@ -17,6 +17,10 @@ body {
   font-family: "myfont2";
   src: url(../assets/fonts/Courgette-Regular.ttf);
 }
+@font-face {
+  font-family: "myfont3";
+  src: url(../assets/fonts/Lalezar-Regular.ttf);
+}
 
 .background {
   background-color: rgb(195, 195, 196);
@@ -83,6 +87,11 @@ body {
   text-align: end;
 }
 
+.login {
+  width: 50%;
+  margin-top: 5%;
+}
+
 .cart_img {
   width: 25%;
 }
@@ -97,4 +106,27 @@ body {
     font-size: 5px;
     margin: 0 10px;
   }
+}
+@media screen and (max-width: 600px) {
+  .login {
+    margin-top: 10%;
+    width: 90%;
+  }
+  .login_font {
+    font-size: 10px;
+  }
+  .cart_btn {
+    font-size: 5px;
+    margin: 0 10px;
+  }
+}
+
+.login_main {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(63, 125, 153, 0.849);
+}
+
+.error_500 {
+  font-family: "myfont3";
 }
