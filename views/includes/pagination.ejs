@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-center">
+  <nav dir="rtl" aria-label="Page navigation">
+    <ul class="pagination">
+      <% if (hasPrevPage) { %>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="?page=<%= prevPage %>"
+          aria-label="Previous"
+        >
+          <span aria-hidden="true">&laquo;</span></a
+        >
+      </li>
+      <% } %>
+
+      <!-- <% if (currentPage !== 1) { %>
+            <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+          <% } %> -->
+      <li class="page-item">
+        <a class="page-link active" href="?page=2<%= currentPage %>"
+          ><%= currentPage %></a
+        >
+      </li>
+
+      <% if (hasNextPage) { %>
+      <li class="page-item">
+        <a class="page-link" href="?page=<%= nextPage %>" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</div>

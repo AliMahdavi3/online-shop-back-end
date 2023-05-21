@@ -3,15 +3,24 @@
 <%- include("../includes/navbar.ejs") %>
 <!-- main template -->
 <main>
+
+<% if (refId) { %>
+ <div class="alert alert-success">
+    <h4 class="text-center mt-3">پرداخت با موفقیت انجام شد</h4><hr>
+    <h6 class="text-center mt-3">شماره تراکنش : <%= refId %> </h6>
+ </div>
+<% } %>
+
 <% if(orders.length > 0) { %>
     <ul class="list-unstyled container flex-column d-flex justify-content-center align-items-center">
     <% orders.forEach((order) => { %>
-        <li class="text-center rounded-3 boxShadow my-4 w-50">
-            <h4 class="pt-3 pb-2"><%= order._id %> شناسه</h4>
+        <li class="text-center rounded-3 boxShadow my-4 w-100">
+            <h4 class="pt-3 login_font pb-2"><%= order._id %>
+            <a class="text-decoration-none me-1" href="/invoices/<%= order._id %>">دانلود گزارش </a> - شناسه</h4>
             <hr>
             <ul class="list-unstyled">
             <% order.products.forEach((p) => { %>
-                <li class="text-success py-3 border my-2 fw-bold"><%= p.product.title %>
+                <li class="text-success py-3 my-2 border-bottom fw-bold"><%= p.product.title %>
                 <span class="text-danger mx-3">(<%= p.quantity %>)</span></li>
             <% }) %>
             </ul>

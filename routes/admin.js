@@ -17,6 +17,6 @@ router.post("/edit-product", [
     body("price", "لطفا قیمت را به صورت عدد وارد کنید").isFloat(),
     body("description", "توضیحات حداقل 5 کاراکتر است").isLength({min:5}).trim(),
 ] ,isAuth, adminController.postEditProduct);
-router.post("/delete-product", isAuth, adminController.postDeleteProduct);
+router.delete("/product/:productId", isAuth, adminController.deleteProduct);
 
 module.exports = router;

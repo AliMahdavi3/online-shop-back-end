@@ -7,13 +7,14 @@
   <section class="container">
     <main class="row d-flex justify-content-center align-items-center">
     <% for(let product of prods) {%>
-      <div class="col-12 col-sm-6 col-md-4 card my-5 mx-3 border-0" style="width: 15rem;">
-        <img src="<%= product.imageUrl %>" class="card-img-top w-100" alt="...">
+      <article class="col-12 col-sm-6 col-md-4 card my-5 mx-3 border-0" style="width: 15rem;">
+        <h5 class="text-center mt-4 card-title"><%= product.title %></h5>
         <hr>
-        <div class="card-body">
-          <h5 class="card-title"><%= product.title %></h5>
-          <h6 class="card-title"><%= product.price %></h6>
-          <p class="card-text"><%= product.description %></p>
+        <div class="pb-4">
+        <img src="/<%= product.imageUrl %>" class="product_img" alt="...">
+        <h6 class="text-center bg-light pt-2 rounded-3 pb-2 my-4 card-title"><%= product.price %> 
+          <span class="mx-1">ریال</span></h6>
+          <p class="card-text text-center"><%= product.description %></p>
           <hr>
           <div class="d-flex font_size justify-content-end">
             <a href="/products/<%= product._id %>" class="btn btn-success mx-2">اطلاعات</a>
@@ -22,10 +23,17 @@
             <% } %>
           </div>
         </div>
-      </div>
+      </article>
     <% } %>
     </main>
   </section>
+  <%- include("../includes/pagination.ejs",{
+      hasPrevPage : hasPrevPage,
+      prevPage : prevPage,
+      currentPage : currentPage,
+      hasNextPage : hasNextPage,
+      nextPage : nextPage,
+  }) %>
 <% } else { %>
   <div class=" d-flex align-items-center justify-content-center flex-column my-4">
     <h1 class="text-center mt-5 text-danger">!...محصولی یافت نشد</h1>

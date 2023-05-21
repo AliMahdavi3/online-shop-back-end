@@ -1,5 +1,6 @@
 const Product = require("../models/product");
-const { validationResult } = require("express-validator")
+const { validationResult } = require("express-validator");
+const fileHelper = require("../utils/file");
 
 exports.getProduct = (req, res, next) => {
     Product.find({
@@ -32,9 +33,27 @@ exports.getAddProduct = (req, res, next) => {
 exports.postAddProduct = (req, res, next) => {
     const title = req.body.title;
     const price = req.body.price;
-    const imageUrl = req.file;
+    const image = req.file;
     const description = req.body.description;
     const errors = validationResult(req);
+
+    if(!image) {
+        return res.render("admin/add-product", {
+            path : "/admin/add-product",
+            pageTitle : "Add Product",
+            editing : false,
+            isAuthenticated : req.session.isLoggedIn,
+            product : {
+                title : title,
+                imageUrl : image,
+                price : price,
+                description : description,
+            },
+            errorMessage : "لطفا عکس وارد کنید",
+            hasError : true,
+            validationErrors : [],
+        });
+    }
 
     if(!errors.isEmpty()) {
         console.log(errors.array());
@@ -46,7 +65,7 @@ exports.postAddProduct = (req, res, next) => {
             isAuthenticated : req.session.isLoggedIn,
             product : {
                 title : title,
-                imageUrl : imageUrl,
+                imageUrl : image,
                 price : price,
                 description : description,
             },
@@ -59,7 +78,7 @@ exports.postAddProduct = (req, res, next) => {
     const product = new Product({
         title : title,
         price : price,
-        imageUrl : imageUrl,
+        imageUrl : image.path,
         description : description,
         userId : req.user,
     });
@@ -99,7 +118,7 @@ exports.postEditProduct = (req, res, next) => {
     const prodId = req.body.productId;
     const updateTitle = req.body.title;
     const updatePrice = req.body.price;
-    const updateImageUrl = req.body.imageUrl;
+    const image = req.file;
     const updateDesc = req.body.description;
     const errors = validationResult(req);
 
@@ -112,7 +131,6 @@ exports.postEditProduct = (req, res, next) => {
             validationErrors : errors.array(),
             product : {
                 title : updateTitle,
-                imageUrl : updateImageUrl,
                 price : updatePrice,
                 description : updateDesc,
                 _id : prodId,
@@ -130,7 +148,10 @@ exports.postEditProduct = (req, res, next) => {
 
         product.title = updateTitle;
         product.price = updatePrice;
-        product.imageUrl = updateImageUrl;
+        if(image) {
+            fileHelper.deleteFile(product.imageUrl);
+            product.imageUrl = image.path;
+        }
         product.description = updateDesc;
         return product.save().then((result) => {
             console.log("Product Updated...!");
@@ -143,17 +164,22 @@ exports.postEditProduct = (req, res, next) => {
     });
 };
 
-exports.postDeleteProduct = (req, res, next) => {
-    const prodId = req.body.productId;
-    Product.deleteOne({
-        _id : prodId,
-        userId : req.user._id,
+exports.deleteProduct = (req, res, next) => {
+    const prodId = req.params.productId;
+
+    Product.findById(prodId).then((product) => {
+        if(!product) {
+            return next(new Error("Product Not Found...!"));
+        };
+        fileHelper.deleteFile(product.imageUrl);
+        return Product.deleteOne({
+            _id : prodId,
+            userId : req.user._id,
+        });
     }).then(() => {
         console.log("Product Removed...!");
-        res.redirect("/admin/products");
+        res.json({message : "successfull"});
     }).catch((error) => {
-        const MainError = new Error(error);
-        MainError.httpStatusCode = 500;
-        return next(error);
+        res.json({message : "delete has been faild...!"});
     });
 };

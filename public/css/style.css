@@ -130,3 +130,9 @@ body {
 .error_500 {
   font-family: "myfont3";
 }
+
+.product_img {
+  width: 100%;
+  height: 20vh;
+  border-radius: 10px;
+}

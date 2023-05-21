@@ -12,28 +12,19 @@
             </div>
             <h3 class="ms-5 ms-sm-5 mt-2 cart_font"><%= p.productId.title %></h3>
             <h4 class="ms-1 ms-sm-5 mt-2 cart_font"><%= p.quantity %></h4>
-            <form action="/cart-delete-item" method="post">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <button type="submit" class="cart_btn btn btn-danger ms-1 ms-sm-5">حذف</button>
-                <input type="hidden" name="productId" value="<%= p.productId._id %>">
-            </form>
         </li>
     <%   }); %>
     </ul>
-    <div class="mb-5">
-        <div>
-            <div>
-                <!-- <form action="/create-order" method="post">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit" class="btn btn-dark">سفارش محصولات</button>
-                </form> -->
-                <a href="/checkout" class="btn btn-warning">سفارش</a>
-            </div>
-        </div>
+    <div>
+        <h5 class="fw-bold"><span class="text-danger">مبلغ نهایی</span>: <%= totalSum %></h5>
     </div>
+    <div class="mb-5 mt-3">
+        <a class="btn btn-success" href="/paymentRequest">پرداخت</a>
+    </div>
+
     <% } else { %>
     <div class="d-flex align-items-center justify-content-center flex-column my-4">
-        <h1 class="text-center text-danger my-5">!...سبد خرید خالی است</h1>
+        <h1 class="text-center text-danger my-5">!...سفارشی ثبت نشده است</h1>
         <img src="../assets/image/no-cart.jpg" class="w-25" alt="no product">
     </div>
     <% } %>

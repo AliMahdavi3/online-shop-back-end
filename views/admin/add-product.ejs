@@ -1,55 +1,59 @@
-<%- include("../includes/head.ejs") %> 
-<%- include("../includes/header.ejs") %>
+<%- include("../includes/head.ejs") %> <%- include("../includes/header.ejs") %>
 <%- include("../includes/navbar.ejs") %>
 
 <div dir="rtl" class="container">
+  <% if(hasError) { %> <% if(errorMessage) { %>
+  <div class="alert alert-danger mt-3"><%= errorMessage %></div>
+  <% } %> <% } %>
 
-    <% if(hasError) { %>
-        <% if(errorMessage) { %>
-            <div class="alert alert-danger mt-3"><%= errorMessage %></div>
-        <% } %>
+  <form
+    enctype="multipart/form-data"
+    action="/admin/<% if(editing){ %>edit-product<% } else { %>add-product<% } %>"
+    method="post"
+  >
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <div class="mb-3 mt-3">
+      <label for="title" class="form-label">عنوان</label>
+      <input type="text" name="title" class="form-control <%=
+      validationErrors.find((e) => e.path === "title") ? "alert alert-danger" :
+      "" %>" placeholder="عنوان محصول را وارد کنید" id="title" value="<%
+      if(editing || hasError){ %> <%= product.title %><% } %>">
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">قیمت</label>
+      <input type="number" name="price" class="form-control price <%=
+      validationErrors.find((e) => e.path === "price") ? "alert alert-danger" :
+      "" %>" placeholder="قیمت محصول را وارد کنید" id="price" value="<%
+      if(editing || hasError){ %><%= product.price%><% } %>">
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">آدرس عکس</label>
+      <input
+        type="file"
+        name="image"
+        class="form-control"
+        placeholder="عکس محصول را وارد کنید"
+        id="image"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">توضیحات</label>
+      <textarea
+        class="form-control <%= validationErrors.find((e) => e.path ==='description' ) ? 'alert alert-danger' : '' %>"
+        name="description"
+        cols="30"
+        rows="10"
+      >
+<% if(editing || hasError) { %><%=product.description%> <% } %>
+      </textarea>
+    </div>
+    <% if(editing){ %>
+    <input type="hidden" value="<%= product._id %>" name="productId" />
     <% } %>
-
-
-    <form enctype="multipart/form-data" action="/admin/<% if(editing){ %>edit-product<% } else { %>add-product<% } %>" method="post">
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <div class="mb-3 mt-3">
-            <label for="title" class="form-label">عنوان</label>
-            <input type="text" name="title" 
-            class="form-control 
-            <%= validationErrors.find((e) => e.path === "title") ? "alert alert-danger" : "" %>" 
-            placeholder="عنوان محصول را وارد کنید" id="title" 
-            value="<% if(editing || hasError){ %> <%= product.title %><% } %>">
-        </div>
-        <div class="mb-3">
-            <label for="price" class="form-label">قیمت</label>
-            <input type="number" name="price" 
-            class="form-control price 
-            <%= validationErrors.find((e) => e.path === "price") ? "alert alert-danger" : "" %>" 
-            placeholder="قیمت محصول را وارد کنید" id="price" 
-            value="<% if(editing || hasError){ %><%= product.price%><% } %>">
-        </div>
-        <div class="mb-3">
-            <label for="image" class="form-label">آدرس عکس</label>
-            <input type="file" name="image" 
-            class="form-control" 
-            placeholder="عکس محصول را وارد کنید" id="image" >
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">توضیحات</label>
-            <textarea class="form-control 
-            <%= validationErrors.find((e) => e.path === "description") ? "alert alert-danger" : "" %>" 
-            name="description" 
-            id="description" rows="3">
-                <% if(editing || hasError){ %><%=product.description%><% } %>
-            </textarea>
-        </div>
-        <% if(editing){ %>
-            <input type="hidden" value="<%= product._id %>" name="productId">
-        <% } %>
-        <button type="submit" 
-        class="pt-2 mb-5 btn btn-success"><% if(editing){ %>ویرایش محصول<% } else { %>ثبت محصول<% } %></button>
-    </form>
+    <button type="submit" class="pt-2 mb-5 btn btn-success">
+      <% if(editing){ %>ویرایش محصول<% } else { %>ثبت محصول<% } %>
+    </button>
+  </form>
 </div>
 
 <%- include("../includes/end.ejs") %>
